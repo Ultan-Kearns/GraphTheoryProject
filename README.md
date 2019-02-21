@@ -8,3 +8,4 @@
 + https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form
 + https://en.wikipedia.org/wiki/Chomsky_hierarchy
 + https://www.goodreads.com/book/show/388049.Introduction_to_Graph_Theory
++ https://en.wikipedia.org/wiki/Thompson's_construction 
