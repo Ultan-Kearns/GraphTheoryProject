@@ -6,17 +6,13 @@ def parse(regex):
 	#check string for operators
 	for i in range (stringLength):
 		if(regex[i] == '|' or regex[i] == '.' or regex[i] == '*'):
-			for i in range(stringLength):				
-				#check to see if any numbers or operators precede operator
-				if(regex[i - 1] != '1' and regex[i - 1 != '0'] and regex[i - 1] != '|' 
-					and regex[i - 1] != '.' and regex[i - 1] != '*'):
-					print("IN " + regex[i + 1])
-					operators += regex[i] + " "
-					regex = regex.replace(regex[i], "a", 1) 
-					#check if next occuring is char is number
-					if(regex[i + 1] == '1' or regex[i + 1] == '0'):
-						regex += operators
-						oprators = ""
+			operators += regex[i]
+			regex = regex.replace(regex[i],"",1)
+			for j in range(stringLength):
+				if(regex[j] != 1 or regex[j] != 0 or regex[j] == '|' or regex[j] == '.' or regex[j] == '*'):
+					regex += operators
+					operators = " "
+					break;
 	#need to reorganize operators by precedence
 	#add operators to end of expression
 	print ( "BEFORE " + regex)
