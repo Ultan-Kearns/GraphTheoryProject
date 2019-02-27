@@ -1,10 +1,9 @@
-def parse(regex):
-	#convert prefix to postfix
-	print(regex)
+import parse;
 
 #infinite while
 while True:
 	#take user regex in and search
 	print("Enter regex expression")
 	regex = input()
-	parse(regex)
+	infix = parse.parse(regex)
+	print("INFIX " + infix)

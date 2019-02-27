@@ -9,3 +9,5 @@
 + https://en.wikipedia.org/wiki/Chomsky_hierarchy
 + https://www.goodreads.com/book/show/388049.Introduction_to_Graph_Theory
 + https://en.wikipedia.org/wiki/Thompson's_construction 
++ https://en.wikipedia.org/wiki/Reverse_Polish_notation
++ https://en.wikipedia.org/wiki/Infix_notation
