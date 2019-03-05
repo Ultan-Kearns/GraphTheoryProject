@@ -5,5 +5,6 @@ while True:
 	#take user regex in and search
 	print("Enter regex expression")
 	regex = input()
+	print(post.parse(regex))
 	infix = post.parse(regex)
 	print("INFIX " + infix)

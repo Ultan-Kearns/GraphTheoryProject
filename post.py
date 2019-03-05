@@ -1,23 +1,26 @@
 def parse(regex):
 	#convert prefix to postfix . | *
-	stringLength = len(regex);
-	operators = ""
-	print(regex)
-	#check string for operators
+	stack = ""
+	pofix = ""
+	specialChar = {'*': 50,'.':40,'|':30}
+	#check string for stack
 	#problem is since j is restarting from beginning of string the whole time it puts at end
-	for i in range (stringLength):
-		if(regex[i] == '|' or regex[i] == '.' or regex[i] == '*'):
-			operators += regex[i]
-			regex.replace(regex[i], "",1)
-			for j in range(stringLength):
-				if(regex[j] != "0" or regex[j] != "1" or regex[j] != " "):
-					regex = regex.replace(regex [j],"(",1)
-					regex += ")" + operators
-					operators = " "
-					break 
-	#need to reorganize operators by precedence
-	#add operators to end of expression
-	print ( "BEFORE " + regex)
-	print ("OPERATOR " + operators)	
-	regex = regex.replace("a","")
-	return regex
+	for i in regex:
+		if i == '(':
+			stack = stack + i
+			print("stack  " + stack)
+		elif i == ')':
+			while stack[-1] != '(':
+				pofix,stack = pofix + stack[-1],stack[:-1]
+				print("POFIX  " + pofix)
+			stack = stack[:-1]
+		elif i in specialChar:
+			while stack and specialChar.get(i,0) <= specialChar.get(stack[-1],0):
+				pofix,stack = pofix + stack[-1],stack[:-1]
+				print("stack  " + stack)
+			stack = stack + i
+		else:
+			pofix = pofix + i
+			print("POFIX" + pofix)
+		pofix = pofix + stack
+		return pofix;
