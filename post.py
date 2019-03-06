@@ -1,23 +1,28 @@
 def parse(regex):
 	#convert prefix to postfix . | *
-	stack = ""
-	pofix = ""
+	opStack = ""
+	postfix = ""
+	#make dictionary of special chars
 	specialChar = {'*': 50,'.':40,'|':30}
-	#check string for stack
-	#problem is since j is restarting from beginning of string the whole time it puts at end
+	#for each character in regular expression
 	for i in regex:
 		if i == '(':
-			stack = stack + i
+			opStack = opStack + i
 		elif i == ')':
-			while stack[-1] != '(':
-				pofix,stack = pofix + stack[-1],stack[:-1]
-			stack = stack[:-1]
+			#check if opStack - 1 == ) if not keep adding stack to pofix then pop items off stack
+			while opStack[-1] != '(':
+				postfix,opStack = postfix + opStack[-1],opStack[:-1]
+			#pop ( off stack
+			opStack = opStack[:-1]
 		elif i in specialChar:
-			while stack and specialChar.get(i,0) <= specialChar.get(stack[-1],0):
-				pofix,stack = pofix + stack[-1],stack[:-1]
-			stack = stack + i
+			#check precedence of operators on stack and pop off if none put 0
+			while opStack and specialChar.get(i,0) <= specialChar.get(opStack[-1],0):
+				postfix,opStack = postfix + opStack[-1],opStack[:-1]
+			opStack = opStack + i
+		#add random characters or digits to postfix
 		else:
-			pofix = pofix + i
-	while stack:
-		pofix,stack = pofix + stack[-1],stack[:-1]
-	return pofix;
+			postfix = postfix + i
+	#add the operators from stack to pofix then pop off stack
+	while opStack:
+		postfix,opStack = postfix + opStack[-1],opStack[:-1]
+	return postfix;
