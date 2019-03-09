@@ -20,12 +20,12 @@ def parse(regex):
 			while opStack and specialChar.get(i,0) <= specialChar.get(opStack[-1],0):
 				postfix,opStack = postfix + opStack[-1],opStack[:-1]
 			opStack = opStack + i
-			print(opStack)
-			operators.op(opStack);
 		#add random characters or digits to postfix
 		else:
 			postfix = postfix + i
 	#add the operators from stack to pofix then pop off stack
 	while opStack:
 		postfix,opStack = postfix + opStack[-1],opStack[:-1]
+		operators.op(postfix);
+		print("TEST" + opStack)
 	return postfix;

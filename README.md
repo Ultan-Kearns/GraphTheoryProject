@@ -1,4 +1,23 @@
 #  3rd Year GraphTheoryProject - Ultan Kearns G00343745
+## How to use this application
+This project can be run as follows from the command line "python regex.py" ommitting the quotes.
+The main class regex is the class which will call post.py which will convert prefix to postfix,
+the other class operators.py will return to the user the result of the regex expression and how many
+times it occurs in a given string.  This program will only work with an alphabet of 1s and 0s as per the 
+project specification.
+## Architecture
+I decided to take an OOP(Object oriented programming) approch to the project and separate each of the 
+functions performed into it's own class to reduce the project's complexity.
+
+1. Regex Main Class - Base class of project, this class will be called during the initialization of the project.
+2. Postfix class - This class will be called when the user enters the regex expression as input in the main class
+the regex expression is passed as an argument to the function located in the postfix class.  The parse function
+will return the regex string as postfix.
+3. Operators Class - This class will perform operations in the regex string and then tell the user how many times it 
+has matched the regex expression depending on operator for example 1 0 * meaning 0 or more ones or 0s will return 2 for string
+"1 0". This class contains only one function which is called in postfix and takes the operators from postfix string as an argument.
+
+
 ## Resources for research of project
 + https://en.wikipedia.org/wiki/Regular_expression
 + https://www.regular-expressions.info/engine.html

@@ -1,11 +1,10 @@
 def op(regex):
 	for c in regex:
 		if(c == '*'):
-			print("concatenate")
+			print("Kleene")
 		elif(c == '.'):
-			print("and")
+			print("Concatenate")
 		elif(c == '|'):
 			print("or")
 		else:
-			print("invalid operator")
 		
