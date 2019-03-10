@@ -3,8 +3,6 @@ def parse(regex):
 	#convert prefix to postfix . | *
 	opStack = ""
 	postfix = ""
-	print("Please enter string you want to query only 1's and 0's");
-	queryString = input();
 	#make dictionary of special chars
 	specialChar = {'*': 50,'.':40,'|':30}
 	#for each character in regular expression
@@ -28,6 +26,5 @@ def parse(regex):
 	#add the operators from stack to pofix then pop off stack
 	while opStack:
 		postfix,opStack = postfix + opStack[-1],opStack[:-1]
-		operators.op(postfix,queryString);
-		print("TEST" + opStack)
+		operators.op(postfix);
 	return postfix;
