@@ -3,6 +3,8 @@ def parse(regex):
 	#convert prefix to postfix . | *
 	opStack = ""
 	postfix = ""
+	print("Please enter query string: ")
+	query = input();
 	#make dictionary of special chars
 	specialChar = {'*': 50,'.':40,'|':30}
 	#for each character in regular expression
@@ -26,5 +28,5 @@ def parse(regex):
 	#add the operators from stack to pofix then pop off stack
 	while opStack:
 		postfix,opStack = postfix + opStack[-1],opStack[:-1]
-		operators.op(postfix);
+		operators.op(postfix,query);
 	return postfix;
