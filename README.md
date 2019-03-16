@@ -30,3 +30,4 @@ has matched the regex expression depending on operator for example 1 0 * meaning
 + https://en.wikipedia.org/wiki/Thompson's_construction 
 + https://en.wikipedia.org/wiki/Reverse_Polish_notation
 + https://en.wikipedia.org/wiki/Infix_notation
++ Course Materials

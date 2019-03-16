@@ -1,3 +1,93 @@
+#define class state to make state objects
+class state:
+	label = None
+	edge1 = None
+	edge2 = None
+
+class nfa:
+	start = None
+	end = None
+	#sets parameters of state obj
+	def __init__(self,start,end):
+		self.start = start
+		self.end = end
+#problem here
+def pofixNfa(postfix):
+	automataStack = []
+	for c in postfix:
+		if(c == '.'):
+			nfa1 = automataStack.pop()
+			nfa2 = automataStack.pop()
+			nfa1.end.edge1 = nfa2.start
+			newNfa = nfa(nfa1.intial,nfa2.end)
+			automataStack.append(newNfa)
+		elif(c == '|'):
+			nfa1 =  automataStack.pop()
+			nfa2 = automataStack.pop()
+			start = state()
+			start.edge1 = nfa1.start
+			intial.edge2 = nfa2.start
+			end = state()
+			nfa2.end.edge1 = end
+			nfa1.end.edge1 = end
+			newNfa = nfa(start,end)
+			automataStack.append(newNfa)
+		elif (c == '*'):
+			nfa1 = automataStack.pop()
+			start = state()
+			end = state()
+			start.edge1 = nfa.start
+			start.edge2 = end
+			nfa1.end.edge1 = nfa1.start
+			nfa1.end.edge2 = end
+			newNfa = nfa(start,end)
+			automataStack.append(newNfa)
+		else:
+			end = state()
+			start = state()
+			start.label = c
+			print("IN ELSE" + start.label)
+			start.edge1 = end
+			newNfa = nfa(start,end)
+			automataStack.append(newNfa)
+	return automataStack.pop()
+
+def followEmpty(state):
+	states = set()
+	states.add(state)
+	if state.label is None:
+		if state.edge1 is not None:
+			states |= followEmpty(state.edge1)
+		if(state.edge2 is not None):
+			states |= followEmpty(state.edge2)
+	return states
+def match(postfix,query):
+	print(postfix)
+	nfa = pofixNfa(postfix)
+	current = set()
+	next = set()
+	current |= followEmpty(nfa.start)
+	for s in query:
+		for c in current:
+			print(s,str(c))
+			if(c.label == s):
+				next |= followEmpty(c.edge1)
+		current = next
+		next = set()
+	return(nfa.end in current)
+infixes = ["a.b.c"]
+strings = ["abc"]
+for i in infixes:
+	for s in strings:
+		print(match(i,s),i,s)
+
+
+
+
+
+
+
+"""
 def op(regex,queryString):
 	kleeneOp = 0
 	conOp = 0
@@ -18,16 +108,19 @@ def op(regex,queryString):
 			i = prevOpLoc
 			if(prevOpLoc > 0 and  regex[c - 1] != '|' or regex[c - 1] != '.' or regex[c - 1] != '*'):
 				for char in range(len(queryString)):
-					for c in range(len(regex)):
-						if(queryString[char] == regex[c]):
+					print("IN FOR")
+					if(regex[char] == '*'):
+						break
+					if(queryString[char] == regex[char] or queryString[char] == " "):
 							kleeneOp+=1
+				if(regex[char] == '*'):
+					break;
 			else:
 				for i in queryString:
-					print("regex",regex[i])
-					if(i == '1' or i == '0' or i == '' or i == ' '):
+					if(queryString == regex or queryString[i] == " "):
 						kleeneOp+=1
-					elif(regex[i] == '*'):
-						break;
+				if(regex[i] == '*'):
+					break;
 			prevOpLoc = c;
 			print("No. of occurrences result of Kleene operation: ",kleeneOp);
 		#if query < regex fails
@@ -37,8 +130,11 @@ def op(regex,queryString):
 			#check to see if a previous operation was performed also need to check which chars to concatenate
 			if(prevOpLoc > 0 and regex[c - 1] != '*' and regex[c - 1] != '|' and regex[c - 1] != '.'):
 				for char in range(len(queryString)):
-					if(regex[char] == queryString[char] and regex[char + 1] == queryString[char]):
-						conOp+=1
+					for c in range(len(regex)):
+						#need to find way to iterate constantly repeat search of regex for query
+						if(regex[char] == queryString[char]):
+							conOp+=1
+
 			else:
 				for i in range(len(regex)):
 					if(regex[i] == queryString[i] and regex[i] == queryString[i]):
@@ -51,9 +147,10 @@ def op(regex,queryString):
 			#not working if or is after operator
 			if (i > 0 and regex[c - 1] != '*' and regex[c - 1] != '.' and regex[c - 1] != '|'):
 				for char in range(len(queryString)):
-					print("IN FOR",queryString[char])
 					if(queryString[char] == '0' or queryString[char] == '1'):
 						orOp+=1
+					if( regex[char] == '|'):
+						break;
 			else:
 				print("in else")
 				for i in queryString:
@@ -63,3 +160,4 @@ def op(regex,queryString):
 			print("No. of occurrences result of or operation: ",orOp);
 		else:
 			print("")
+"""	

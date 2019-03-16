@@ -1,5 +1,9 @@
 import operators;
 def parse(regex):
+	"""
+	Function to parse infix to postfix using the function 
+	yard algorithm
+	"""
 	#convert prefix to postfix . | *
 	opStack = ""
 	postfix = ""
@@ -28,5 +32,6 @@ def parse(regex):
 	#add the operators from stack to pofix then pop off stack
 	while opStack:
 		postfix,opStack = postfix + opStack[-1],opStack[:-1]
-		operators.op(postfix,query);
+	print(operators.match(postfix,query))
+	print("postfix: ", postfix, "Query ", query)
 	return postfix;
