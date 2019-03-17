@@ -33,5 +33,4 @@ def parse(regex):
 	while opStack:
 		postfix,opStack = postfix + opStack[-1],opStack[:-1]
 	print(operators.match(postfix,query))
-	print("postfix: ", postfix, "Query ", query)
 	return postfix;

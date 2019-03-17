@@ -16,17 +16,17 @@ def pofixNfa(postfix):
 	automataStack = []
 	for c in postfix:
 		if(c == '.'):
-			nfa1 = automataStack.pop()
 			nfa2 = automataStack.pop()
+			nfa1 = automataStack.pop()
 			nfa1.end.edge1 = nfa2.start
-			newNfa = nfa(nfa1.intial,nfa2.end)
+			newNfa = nfa(nfa1.start,nfa2.end)
 			automataStack.append(newNfa)
 		elif(c == '|'):
 			nfa1 =  automataStack.pop()
 			nfa2 = automataStack.pop()
 			start = state()
 			start.edge1 = nfa1.start
-			intial.edge2 = nfa2.start
+			start.edge2 = nfa2.start
 			end = state()
 			nfa2.end.edge1 = end
 			nfa1.end.edge1 = end
@@ -36,7 +36,7 @@ def pofixNfa(postfix):
 			nfa1 = automataStack.pop()
 			start = state()
 			end = state()
-			start.edge1 = nfa.start
+			start.edge1 = nfa1.start
 			start.edge2 = end
 			nfa1.end.edge1 = nfa1.start
 			nfa1.end.edge2 = end
@@ -46,7 +46,6 @@ def pofixNfa(postfix):
 			end = state()
 			start = state()
 			start.label = c
-			print("IN ELSE" + start.label)
 			start.edge1 = end
 			newNfa = nfa(start,end)
 			automataStack.append(newNfa)
@@ -58,11 +57,10 @@ def followEmpty(state):
 	if state.label is None:
 		if state.edge1 is not None:
 			states |= followEmpty(state.edge1)
-		if(state.edge2 is not None):
+		if state.edge2 is not None:
 			states |= followEmpty(state.edge2)
 	return states
-def match(postfix,query):
-	print(postfix)
+def match(postfix,query):	
 	nfa = pofixNfa(postfix)
 	current = set()
 	next = set()
@@ -75,12 +73,12 @@ def match(postfix,query):
 		current = next
 		next = set()
 	return(nfa.end in current)
-infixes = ["a.b.c"]
-strings = ["abc"]
+
+infixes = ["a*"]
+strings = ["abc","aaaaa","a"]
 for i in infixes:
 	for s in strings:
 		print(match(i,s),i,s)
-
 
 
 
