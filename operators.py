@@ -61,9 +61,12 @@ def pofixNfa(postfix):
 			nfa1.end.edge2 = end
 			newNfa = nfa(start,end)
 			automataStack.append(newNfa)
+			#kinda worked before
 		elif (c == '+'):
 			#pop nfa off stack
+			nfa2 = automataStack.pop()
 			nfa1 = automataStack.pop()
+
 			#empty start and end state
 			start = state()
 			end = state()
@@ -72,7 +75,8 @@ def pofixNfa(postfix):
 			start.edge2 = end
 			#set end edges
 			nfa1.end.edge1 = nfa1.start
-			nfa1.end.edge2 = end
+			nfa1.end.edge2 = nfa2.start
+			nfa2.end.edge1 = end
 			newNfa = nfa(start,end)
 			automataStack.append(newNfa)
 		#else it's characters to perform operations on
