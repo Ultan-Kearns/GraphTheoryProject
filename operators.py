@@ -64,9 +64,9 @@ def pofixNfa(postfix):
 			#kinda worked before
 		elif (c == '+'):
 			#pop nfa off stack
+			#nfa 2 needs to be first
 			nfa2 = automataStack.pop()
 			nfa1 = automataStack.pop()
-
 			#empty start and end state
 			start = state()
 			end = state()
@@ -76,6 +76,23 @@ def pofixNfa(postfix):
 			#set end edges
 			nfa1.end.edge1 = nfa1.start
 			nfa1.end.edge2 = nfa2.start
+			nfa2.end.edge1 = end
+			newNfa = nfa(start,end)
+			automataStack.append(newNfa)
+		elif (c == '?'):
+						#pop nfa off stack
+			#nfa 2 needs to be first
+			nfa2 = automataStack.pop()
+			nfa1 = automataStack.pop()
+			#empty start and end state
+			start = state()
+			end = state()
+			#set start edges
+			start.edge1 = nfa1.start
+			start.edge2 = end
+			#set end edges
+			nfa1.end.edge1 = nfa1.start
+			nfa1.end.edge1 = nfa2.start
 			nfa2.end.edge1 = end
 			newNfa = nfa(start,end)
 			automataStack.append(newNfa)
@@ -114,7 +131,7 @@ def match(postfix,query):
 	return(nfa.end in current)
 
 infixes = ["a*","(ab+)c"]
-strings = ["abc","aaaaa","a","abc"]
+strings = []
 for i in infixes:
 	for s in strings:
 		print(match(i,s),i,s)
