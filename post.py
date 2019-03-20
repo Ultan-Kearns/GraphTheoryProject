@@ -10,7 +10,7 @@ def parse(regex):
 	print("Please enter query string: ")
 	query = input();
 	#make dictionary of special chars
-	specialChar = {'*': 50,'+':45,'?':42,'.':40,'|':30}
+	specialChar = {'*': 90,'+':80,'?':70,'.':60,'^':55,'|':50}
 	#for each character in regular expression
 	for i in regex:
 		if i == '(':
