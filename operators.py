@@ -95,12 +95,21 @@ def pofixNfa(postfix):
 			nfa1.end.edge1 = end
 			newNfa = nfa(start,end)
 			automataStack.append(newNfa)
+		#starts with Operator
 		elif(c == '^'):
 			nfa1 = automataStack.pop()
 			start = state()
 			end = state()
 			start.edge1 = nfa1.start
 			nfa1.end.edge2 = end
+			newNfa = nfa(start,end)
+			automataStack.append(newNfa)
+		elif(c == '$'):
+			nfa1 = automataStack.pop()
+			start = state()
+			end = state()
+			start.edge1 = nfa1.start
+			nfa1.end.edge1 = end
 			newNfa = nfa(start,end)
 			automataStack.append(newNfa)
 		#else it's characters to perform operations on
