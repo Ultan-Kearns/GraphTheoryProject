@@ -1,16 +1,16 @@
-import operators;
+
 def parse(regex):
 	"""
 	Function to parse infix to postfix using the function 
 	yard algorithm
 	"""
-	#convert prefix to postfix . | *
+	#convert prefix to postfix 
 	opStack = ""
 	postfix = ""
 	print("Please enter query string: ")
 	query = input();
 	#make dictionary of special chars
-	specialChar = {'^':100,'$':0,'*': 90,'+':80,'?':70,'.':60,'|':50}
+	specialChar = {'^':100,'$':0,'*': 90,'+':90,'?':90,'.':60,'|':50}
 	#for each character in regular expression
 	for i in regex:
 		if i == '(':
@@ -32,5 +32,6 @@ def parse(regex):
 	#add the operators from stack to pofix then pop off stack
 	while opStack:
 		postfix,opStack = postfix + opStack[-1],opStack[:-1]
+	import operators;
 	print(operators.match(postfix,query))
 	return postfix;
